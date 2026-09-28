@@ -28,36 +28,6 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      # PRUEBA TEMPORAL PARA COMPROBAR TELEGRAM
-      - name: Probar Telegram
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          python - <<'PY'
-          import os
-          import requests
-
-          token = os.environ["TELEGRAM_BOT_TOKEN"]
-          chat_id = os.environ["TELEGRAM_CHAT_ID"]
-
-          url = f"https://api.telegram.org/bot{token}/sendMessage"
-
-          respuesta = requests.post(
-              url,
-              data={
-                  "chat_id": chat_id,
-                  "text": "✅ PRUEBA EXITOSA\n\n🚀 El monitor de ProInnóvate está conectado correctamente con Telegram."
-              },
-              timeout=30
-          )
-
-          print("Código HTTP:", respuesta.status_code)
-          print("Respuesta Telegram:", respuesta.text)
-
-          respuesta.raise_for_status()
-          PY
-
       - name: Ejecutar monitor
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
