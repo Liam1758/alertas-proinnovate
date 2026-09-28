@@ -1,42 +1,46 @@
-name: Monitor ProInnovate
-
-on:
-  schedule:
-    # Ejecutar automáticamente cada 6 horas
-    - cron: "0 */6 * * *"
-
-  # Permite ejecutarlo manualmente cuando quieras
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-jobs:
-  monitor:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Descargar repositorio
-        uses: actions/checkout@v4
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Instalar dependencias
-        run: pip install -r requirements.txt
-
-      - name: Ejecutar monitor ProInnovate
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python monitor.py
-
-      - name: Guardar historial
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add convocatorias.json
-          git diff --cached --quiet || git commit -m "Actualizar historial de convocatorias"
-          git push
+{
+  "https://startup.proinnovate.gob.pe/concursos/emprendimientos-innovadores/": {
+    "titulo": "Emprendimientos Innovadores",
+    "huella": "5b33d867df606c5739e5f3f4608978bc4b28c439fb9d48d5fd72ddaad01f6f75"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/emprendimientosdinamicos/": {
+    "titulo": "Emprendimientos Dinámicos",
+    "huella": "11d97dfc80186e6ad4ab709381eaaa99ce1bb0cdbaaed4496b78f66c720fdb16"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/concursos-startup-peru-plug/": {
+    "titulo": "STARTUP PERÚ PLUG - CAMBIO CLIMÁTICO 2G",
+    "huella": "5a0602d61e6d789bb4ceae74450510a219d77a920b5b498ae792cb83957e0ba3"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/incubadoras-y-aceleradoras-regiones/": {
+    "titulo": "Incubadoras y Aceleradoras de Emprendimientos Innovadores en Regiones",
+    "huella": "72ef95d7b1f20dda6c8bc743d5e8a9352fb624e8f61edd0c3e9804ff3a1393c0"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/red-de-emprendimiento-femenino/": {
+    "titulo": "Red de Emprendimiento Femenino",
+    "huella": "670c61d987126876ed98f6e87d4e717173beab88cbcca47ce1e4c41583304b07"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/capital-de-riesgo-startups/": {
+    "titulo": "Fomento de Capital de Riesgo en Emprendimientos Dinámicos y de Alto Impacto (startups)",
+    "huella": "e28895b3b0aaa6b34cefcf1d94fac607dab803a1550245f696669e35b68db6d9"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/incubadoras20/": {
+    "titulo": "INCUBADORAS Y ACELERADORAS EN REGIONES",
+    "huella": "f36ff0b7c53b499ca992f20c1a4fb2fbfe762802fe9e34f8ba34b029d0c87d30"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/incubadorassoftanding/": {
+    "titulo": "Incubadoras Softlanding",
+    "huella": "a5a308e32d19079f50111ab92919eec6bbde5ec1bfda1800dd1e2d1e1d95a51a"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/incubadorascambioclimatico/": {
+    "titulo": "INCUBADORAS EN CAMBIO CLIMÁTICO",
+    "huella": "10b88909ac55b52628556a7e250a66568cc53155b71e3b8aa55029383b289c6b"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/incubadoras-y-aceleradoras-de-negocios/": {
+    "titulo": "FORTALECIMIENTO DE INCUBADORAS Y ACELERADORAS",
+    "huella": "37d85f4e14882f4de90d7969084db31a43a29459dc5c8484201d92a4609936b3"
+  },
+  "https://startup.proinnovate.gob.pe/concursos/redes-de-inversionistas-angeles/": {
+    "titulo": "FORTALECIMIENTO DE REDES DE INVERSIONISTAS ÁNGELES",
+    "huella": "2fe0776f52ce0006fd7245fa1a63fc20776fb0f4bed985a81999353f2ab3c8e4"
+  }
+}
